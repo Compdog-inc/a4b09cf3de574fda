@@ -29,6 +29,7 @@ Start-Sleep -Seconds 5
 Start-Process -FilePath "notepad" -ArgumentList "$env:temp\message.txt"
 Start-Sleep -Seconds 5
 Start-Process -FilePath "chrome" -WindowStyle Maximized -ArgumentList "-incognito --start-maximize --new-window https://www.google.com/images?q=fluffy%20cats"
+while($true){if((Get-Process chrome | Foreach {$_.Parent.MainWindowTitle} | where{$_ -like '*fluffy*'}).Length -gt 0){break}};
 foreach($p in Get-Process chrome){[Win32.NativeMethods]::ShowWindowAsync($p.MainWindowHandle, 3);}
 Start-Sleep -Seconds 2
 Start-Process -FilePath "chrome" -ArgumentList "-incognito https://www.google.com/images?q=hamster"
