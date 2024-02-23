@@ -1,5 +1,7 @@
 Start-Sleep -Seconds 5
-Start-Process -FilePath "$env:comspec" -WindowStyle Maximized -ArgumentList "/c tree `"%SystemDrive%\Program Files`""
+$sig = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
+Add-Type -MemberDefinition $sig -name NativeMethods -namespace Win32
+Start-Process -FilePath "$env:comspec" -ArgumentList "/c tree `"%SystemDrive%\Program Files`""
 Start-Sleep -Seconds 2
 Start-Process -FilePath "powershell" -WindowStyle Hidden -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -Command `"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('This')`""
 Start-Sleep -Seconds 2
@@ -26,7 +28,8 @@ sit amet purus gravida quis.
 Start-Sleep -Seconds 5
 Start-Process -FilePath "notepad" -ArgumentList "$env:temp\message.txt"
 Start-Sleep -Seconds 5
-Start-Process -FilePath "chrome" -ArgumentList "-incognito --start-maximize --new-window https://www.google.com/images?q=fluffy%20cats"
+Start-Process -FilePath "chrome" -WindowStyle Maximized -ArgumentList "-incognito --start-maximize --new-window https://www.google.com/images?q=fluffy%20cats"
+foreach($p in Get-Process chrome){[Win32.NativeMethods]::ShowWindowAsync($p.MainWindowHandle, 3);}
 Start-Sleep -Seconds 2
 Start-Process -FilePath "chrome" -ArgumentList "-incognito https://www.google.com/images?q=hamster"
 Start-Sleep -Seconds 2
