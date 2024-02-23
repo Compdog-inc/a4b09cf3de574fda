@@ -29,8 +29,7 @@ Start-Sleep -Seconds 5
 Start-Process -FilePath "notepad" -ArgumentList "$env:temp\message.txt"
 Start-Sleep -Seconds 5
 Start-Process -FilePath "chrome" -WindowStyle Maximized -ArgumentList "-incognito --start-maximize --new-window https://www.google.com/images?q=fluffy%20cats"
-while((Get-Process chrome | Foreach {$_.Parent.MainWindowTitle} | where{$_ -like '*fluffy*'}).Length -lt 1){};
-Start-Process -FilePath "powershell" -WindowStyle Hidden -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -Command `"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('Detected fluffy window')`""
+while((Get-Process chrome | Foreach {$_.MainWindowTitle} | where{$_ -like '*fluffy*'}).Length -lt 1){};
 foreach($p in Get-Process chrome){[Win32.NativeMethods]::ShowWindowAsync($p.MainWindowHandle, 3);}
 Start-Sleep -Seconds 2
 Start-Process -FilePath "chrome" -ArgumentList "-incognito https://www.google.com/images?q=hamster"
