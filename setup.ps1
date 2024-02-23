@@ -1,13 +1,13 @@
 Start-Sleep -Seconds 5
 Start-Process -FilePath "$env:comspec" -WindowStyle Maximized -ArgumentList "/c tree `"%SystemDrive%\Program Files`""
 Start-Sleep -Seconds 2
-msg $env:USERNAME This
+Start-Process -FilePath "powershell" -WindowStyle Hidden -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -Command `"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('This')`""
 Start-Sleep -Seconds 2
-msg $env:USERNAME is
+Start-Process -FilePath "powershell" -WindowStyle Hidden -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -Command `"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('is')`""
 Start-Sleep -Seconds 2
-msg $env:USERNAME a
+Start-Process -FilePath "powershell" -WindowStyle Hidden -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -Command `"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('a')`""
 Start-Sleep -Seconds 2
-msg $env:USERNAME message
+Start-Process -FilePath "powershell" -WindowStyle Hidden -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -Command `"Add-Type -AssemblyName PresentationFramework;[System.Windows.MessageBox]::Show('message')`""
 @"
 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -26,7 +26,7 @@ sit amet purus gravida quis.
 Start-Sleep -Seconds 5
 Start-Process -FilePath "notepad" -ArgumentList "$env:temp\message.txt"
 Start-Sleep -Seconds 5
-Start-Process -FilePath "chrome" -ArgumentList "-incognito --new-window https://www.google.com/images?q=fluffy%20cats"
+Start-Process -FilePath "chrome" -ArgumentList "-incognito --start-maximize --new-window https://www.google.com/images?q=fluffy%20cats"
 Start-Sleep -Seconds 2
 Start-Process -FilePath "chrome" -ArgumentList "-incognito https://www.google.com/images?q=hamster"
 Start-Sleep -Seconds 2
